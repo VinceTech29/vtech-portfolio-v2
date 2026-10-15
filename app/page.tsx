@@ -831,6 +831,7 @@ function ProjectCard({
   secondaryLabel = "GitHub",
   secondaryIcon = "github",
   secondaryHref = "https://github.com/VinceTech29",
+  contributors,
 }: {
   number: string;
   title: string;
@@ -844,6 +845,12 @@ function ProjectCard({
   secondaryLabel?: string;
   secondaryIcon?: IconName;
   secondaryHref?: string;
+  contributors?: {
+    name: string;
+    username: string;
+    avatar: string;
+    github?: string;
+  }[];
 }) {
   return (
     <article className="project-card">
@@ -852,6 +859,8 @@ function ProjectCard({
           <a
             className="project-preview-link"
             href={previewHref}
+            target={previewHref.startsWith("http") ? "_blank" : undefined}
+            rel={previewHref.startsWith("http") ? "noopener noreferrer" : undefined}
             aria-label={`Explore ${title}`}
           >
             {children}
@@ -866,8 +875,39 @@ function ProjectCard({
         <h4>{subtitle}</h4>
         <p>{description}</p>
         <div className="tag-list">{tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+        {contributors && contributors.length > 0 && (
+          <div className="project-contributors-container">
+            <div className="project-contributors-header">
+              <span className="project-contributors-title">Contributors</span>
+              <span className="project-contributors-count">{contributors.length}</span>
+            </div>
+            <div className="project-contributors-list">
+              {contributors.map((c) => (
+                <a
+                  key={c.username}
+                  href={c.github || `https://github.com/${c.username}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-contributor-item"
+                >
+                  <img
+                    src={c.avatar}
+                    alt={c.name}
+                    className="project-contributor-avatar"
+                    width={32}
+                    height={32}
+                  />
+                  <div className="project-contributor-meta">
+                    <span className="project-contributor-username">{c.username}</span>
+                    <span className="project-contributor-name">{c.name}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="project-actions">
-          <Button href={primaryHref} icon="arrow">{primaryLabel}</Button>
+          <Button href={primaryHref} target={primaryHref.startsWith("http") ? "_blank" : undefined} rel={primaryHref.startsWith("http") ? "noopener noreferrer" : undefined} icon="arrow">{primaryLabel}</Button>
           <Button href={secondaryHref} target={secondaryHref.startsWith("http") ? "_blank" : undefined} rel={secondaryHref.startsWith("http") ? "noopener noreferrer" : undefined} variant="ghost" icon={secondaryIcon}>{secondaryLabel}</Button>
         </div>
       </div>
@@ -1544,7 +1584,41 @@ export default function App() {
           <div className="container">
             <SectionHeading eyebrow="03 / SELECTED WORK" title="Projects built around real needs." text="Information systems designed to improve operations, organize data, and support better decisions." />
             <div className="projects-list">
-              <ProjectCard number="01" title="Mig’s Fitness Gym" subtitle="Integrated Attendance and Payment Management System" description="A system designed to improve attendance monitoring and payment management for a local fitness gym." tags={["C#", ".NET", "SQL Server", "Entity Framework"]}><GymMockup /></ProjectCard>
+              <ProjectCard
+                number="01"
+                title="Mig’s Fitness Gym"
+                subtitle="Integrated Attendance and Payment Management System"
+                description="A system designed to improve attendance monitoring and payment management for a local fitness gym."
+                tags={["C#", ".NET", "SQL Server", "Entity Framework"]}
+                primaryLabel="Live demo"
+                primaryHref="https://migs-fitness-management-system.onrender.com/login"
+                previewHref="https://migs-fitness-management-system.onrender.com/login"
+                secondaryLabel="GitHub"
+                secondaryIcon="github"
+                secondaryHref="https://github.com/quielScript/migs-fitness-management-system"
+                contributors={[
+                  {
+                    name: "Exequiel A.",
+                    username: "quielScript",
+                    avatar: "/assets/contributors/quielScript.png",
+                    github: "https://github.com/quielScript",
+                  },
+                  {
+                    name: "Jonathan Peguit Jr.",
+                    username: "QuantumTan",
+                    avatar: "/assets/contributors/QuantumTan.png",
+                    github: "https://github.com/QuantumTan",
+                  },
+                  {
+                    name: "L.Vincent Pablo",
+                    username: "VinceTech29",
+                    avatar: "/assets/contributors/VinceTech29.png",
+                    github: "https://github.com/VinceTech29",
+                  },
+                ]}
+              >
+                <GymMockup />
+              </ProjectCard>
               <ProjectCard number="02" title="Custom Cake Shop CRMS" subtitle="Customer Relationship Management System" description="A CRM-focused system for customer management, ordering transactions, retention, reporting, and day-to-day business operations." tags={["Next.js", "TypeScript", "SQL", "UI/UX"]}><CakeMockup /></ProjectCard>
               <ProjectCard
                 number="03"

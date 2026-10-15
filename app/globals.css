@@ -277,7 +277,19 @@ svg { flex: none; }
 .project-info p { margin: 22px 0; color: #778393; font-size: 13px; line-height: 1.7; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 7px; }
 .tag-list span { padding: 6px 9px; border: 1px solid var(--line); border-radius: 6px; color: #8190a2; font-size: 9px; }
-.project-actions { display: flex; gap: 3px; margin-top: 28px; }
+.project-contributors-container { margin-top: 22px; width: 100%; }
+.project-contributors-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.project-contributors-title { color: #e6edf3; font: 600 13px/1 "Manrope", sans-serif; letter-spacing: -.01em; }
+.project-contributors-count { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 6px; border-radius: 10px; background: rgba(110, 118, 129, 0.22); color: #8b949e; font-size: 11px; font-weight: 600; line-height: 1; }
+.project-contributors-list { display: flex; flex-direction: column; gap: 9px; }
+.project-contributor-item { display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 6px; margin-left: -6px; border-radius: 7px; transition: background .18s ease; }
+.project-contributor-item:hover { background: rgba(255, 255, 255, .04); }
+.project-contributor-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255, 255, 255, .12); flex-shrink: 0; background: #161b22; }
+.project-contributor-meta { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+.project-contributor-username { color: #e6edf3; font: 600 13px/1.3 "Manrope", sans-serif; transition: color .18s ease; }
+.project-contributor-item:hover .project-contributor-username { color: #58a6ff; }
+.project-contributor-name { color: #848d97; font: 400 13px/1.3 "Manrope", sans-serif; }
+.project-actions { display: flex; gap: 3px; margin-top: 24px; }
 .project-mock { width: 105%; min-height: 390px; align-self: end; border: 1px solid rgba(255,255,255,.12); border-bottom: 0; border-radius: 16px 0 0 0; background: #f6f8fb; color: #172031; box-shadow: 0 40px 80px rgba(0,0,0,.35); transform: rotate(-1.5deg); transition: transform .4s; }
 .project-card:hover .project-mock { transform: rotate(0) translateY(-4px); }
 .mock-top { height: 49px; display: flex; align-items: center; padding: 0 21px; border-bottom: 1px solid #e5e9ef; }
