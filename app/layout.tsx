@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -49,7 +50,9 @@ export default function RootLayout({
       className={`${manrope.variable} ${dmSans.variable} dark scroll-smooth h-full antialiased`}
     >
       <head>
-        <script
+        <Script
+          id="anti-extension-hydration"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var o=Element.prototype.setAttribute;Element.prototype.setAttribute=function(n,v){if(typeof n==='string'&&n.indexOf('bis_')===0)return;return o.apply(this,arguments)};if(typeof MutationObserver!=='undefined'){new MutationObserver(function(m){for(var i=0;i<m.length;i++){if(m[i].attributeName&&m[i].attributeName.indexOf('bis_')===0){m[i].target.removeAttribute(m[i].attributeName)}}}).observe(document.documentElement,{subtree:true,attributes:true})}}catch(e){}})();`,
           }}
