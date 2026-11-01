@@ -45,9 +45,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${manrope.variable} ${dmSans.variable} dark scroll-smooth h-full antialiased`}
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var o=Element.prototype.setAttribute;Element.prototype.setAttribute=function(n,v){if(typeof n==='string'&&n.indexOf('bis_')===0)return;return o.apply(this,arguments)};if(typeof MutationObserver!=='undefined'){new MutationObserver(function(m){for(var i=0;i<m.length;i++){if(m[i].attributeName&&m[i].attributeName.indexOf('bis_')===0){m[i].target.removeAttribute(m[i].attributeName)}}}).observe(document.documentElement,{subtree:true,attributes:true})}}catch(e){}})();`,
+          }}
+        />
         <link rel="icon" href="/brand-logo.png" type="image/png" sizes="any" />
         <link rel="apple-touch-icon" href="/brand-logo.png" />
         {/* Devicon CDN for official technology logos */}
@@ -57,7 +63,10 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#05070e] text-slate-100 font-sans selection:bg-blue-600/30 selection:text-blue-200">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#05070e] text-slate-100 font-sans selection:bg-blue-600/30 selection:text-blue-200"
+      >
         {children}
       </body>
     </html>
